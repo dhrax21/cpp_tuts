@@ -83,6 +83,39 @@ void deletion(node* &head,int val){
   delete todelete;
 }
 
+node* reverse(node* &head){
+    node* prevPtr=NULL;
+    node* current=head;
+    node* nextt;
+
+    while(current != NULL){
+        nextt=current->next;
+        current->next=prevPtr;
+        prevPtr=current;
+        current=nextt;
+    }
+
+    return prevPtr;
+}
+
+node* reverseKnodes(node* &head,int k){
+  node* prevPtr=NULL;
+    node* current=head;
+    node* nextt;
+    int count=0;
+    while(current != NULL && count<k){
+        nextt=current->next;
+        current->next=prevPtr;
+        prevPtr=current;
+        current=nextt;
+        count++;
+    }
+    if(nextt != NULL)
+      head->next=reverseKnodes(nextt,k);
+    return prevPtr;
+}
+
+
 int main(){
 
 
